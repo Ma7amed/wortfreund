@@ -1,19 +1,248 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wortfreund – German Vocabulary</title><link rel="stylesheet" href="style.css"></head>
-<body><main>
-<div class="tiles"><span class="der">der</span><span class="die">die</span><span class="das">das</span></div>
-<h1>Wortfreund</h1>
-<p class="muted">Learn German words with pictures, audio and der/die/das colours. Works offline.</p>
-<div class="card">
-<ul>
-<li>Your own word groups, plus ready-made A1 starter groups</li>
-<li>Hear every word with its article</li>
-<li>Offline dictionary: German ↔ English with article and plural</li>
-<li>Spaced repetition: review words just before you forget them</li>
-<li>Optional backup to your own Google Drive</li>
-</ul>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wortfreund</title>
+<meta name="description" content="Learn German words with pictures, sound and the right article. Short daily reviews, an offline dictionary and your own word groups.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: alternating text + phone rows on a quiet app-colored ground; the article colors are the only loud thing. */
+:root{
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#14162B; --muted:#5D6178; --line:#E2E4EE;
+  --primary:#3346C8; --primary-tint:#E8EBFB; --on-primary:#FFFFFF;
+  --der:#2347C8; --die:#A3164F; --das:#1D6B30;
+  --der-bg:#E6EBFB; --die-bg:#F8E5EC; --das-bg:#E2F1E5;
+  --frame:#1B1E2E; --shadow:0 30px 60px -30px rgba(30,40,110,.45);
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842; --on-primary:#141733;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D;
+  --der-bg:#1E2648; --die-bg:#3A1C2A; --das-bg:#18301F;
+  --frame:#2C3047; --shadow:0 30px 60px -30px rgba(0,0,0,.8); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842; --on-primary:#141733;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D;
+  --der-bg:#1E2648; --die-bg:#3A1C2A; --das-bg:#18301F;
+  --frame:#2C3047; --shadow:0 30px 60px -30px rgba(0,0,0,.8); color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:var(--primary)}
+a:focus-visible,.btn:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:12px}
+.der{color:var(--der)}.die{color:var(--die)}.das{color:var(--das)}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.dots{display:flex;gap:4px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--der)}.dots i:nth-child(2){background:var(--die)}.dots i:nth-child(3){background:var(--das)}
+nav .links{display:flex;gap:20px;font-size:15px;font-weight:600}
+nav .links a{color:var(--muted);text-decoration:none}nav .links a:hover{color:var(--ink)}
+
+/* hero */
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding-block:28px 72px}
+.hero > div{min-width:0}
+.eyebrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}
+.chip{font-size:14px;font-weight:700;padding:6px 12px;border-radius:999px}
+.chip.der{background:var(--der-bg)}.chip.die{background:var(--die-bg)}.chip.das{background:var(--das-bg)}
+h1{font-size:clamp(38px,6vw,64px);line-height:1.05;letter-spacing:-.03em;font-weight:800;margin:0 0 20px;text-wrap:balance}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--muted);max-width:34em;margin:0 0 30px}
+.cta{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:12px;background:var(--ink);color:var(--bg);text-decoration:none;padding:12px 22px 12px 18px;border-radius:14px;font-weight:700;line-height:1.15}
+.btn svg{flex:none}
+.btn small{display:block;font-size:11px;font-weight:600;opacity:.8;letter-spacing:.04em;text-transform:uppercase}
+.btn span{font-size:18px}
+.note{font-size:14px;color:var(--muted)}
+
+/* phones */
+.phone{width:100%;max-width:300px;aspect-ratio:600/1182;border-radius:38px;border:9px solid var(--frame);background:var(--frame);overflow:hidden;box-shadow:var(--shadow);flex:none}
+.phone img{display:block;width:100%;height:100%;object-fit:cover}
+.stack{display:flex;justify-content:center}
+.stack .phone + .phone{position:absolute;right:0;top:56px;max-width:230px;opacity:.97}
+@media (max-width:880px){.stack{padding-right:0}.stack .phone + .phone{display:none}}
+
+/* facts strip */
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:20px;overflow:hidden;margin-bottom:96px}
+.fact{background:var(--surface);padding:24px 26px}
+.fact b{display:block;font-size:28px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.fact span{color:var(--muted);font-size:15px}
+
+/* features */
+.feature{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center;margin-bottom:110px}
+.feature > div{min-width:0}
+.feature.flip .text{order:2}
+.feature .art{display:flex;justify-content:center;gap:20px}
+.feature .art .phone{max-width:270px}
+.feature .art.pair .phone{width:calc(50% - 10px);max-width:230px}
+.kicker{font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--primary);margin:0 0 12px}
+h2{font-size:clamp(28px,3.6vw,40px);line-height:1.12;letter-spacing:-.02em;font-weight:800;margin:0 0 16px;text-wrap:balance}
+.text p{color:var(--muted);margin:0 0 18px;max-width:30em}
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px}
+.legend .chip{font-size:15px}
+ol.steps{list-style:none;padding:0;margin:8px 0 0;display:grid;gap:12px}
+ol.steps li{display:flex;gap:14px;align-items:baseline}
+ol.steps li b{flex:none;width:28px;height:28px;border-radius:50%;background:var(--primary-tint);color:var(--primary);display:inline-flex;align-items:center;justify-content:center;font-size:14px;transform:translateY(-1px)}
+.example{display:inline-flex;align-items:center;gap:10px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:10px 16px;font-weight:600;font-size:16px}
+.example .arrow{color:var(--muted)}
+
+/* closing */
+.closing{background:var(--surface);border:1px solid var(--line);border-radius:28px;padding:56px 32px;text-align:center;margin-bottom:56px}
+.closing h2{margin-bottom:12px}
+.closing p{color:var(--muted);margin:0 auto 26px;max-width:32em}
+.closing .cta{justify-content:center}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;color:var(--muted);font-size:14px}
+footer .f-links{display:flex;flex-wrap:wrap;gap:12px 24px}
+footer a{color:var(--muted)}
+.mail{user-select:all;color:var(--ink);font-weight:600}
+
+@media (max-width:880px){
+  .hero{grid-template-columns:1fr;padding-block:8px 56px;gap:36px}
+  .feature,.feature.flip{grid-template-columns:1fr;gap:32px;margin-bottom:80px}
+  .feature.flip .text{order:0}
+  .facts{grid-template-columns:1fr;margin-bottom:72px}
+}
+@media (max-width:520px){
+  nav .links .hide-s{display:none}
+  .feature .art.pair .phone{border-width:6px;border-radius:24px}
+  .phone{border-radius:30px;border-width:7px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .hero .stack .phone:first-child{animation:rise .7s ease-out both}
+  .hero .stack .phone + .phone{animation:rise .7s .12s ease-out both}
+  @keyframes rise{from{transform:translateY(14px)}to{transform:none}}
+}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
+
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="mark" href="#top"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>Wortfreund</a>
+    <div class="links"><a class="hide-s" href="#how">How it works</a><a href="privacy.html">Privacy</a></div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div>
+      <div class="eyebrow" aria-hidden="true"><span class="chip der">der Kaffee</span><span class="chip die">die Milch</span><span class="chip das">das Brot</span></div>
+      <h1>Learn every German word with its <span class="der">der</span>, <span class="die">die</span> or <span class="das">das</span>.</h1>
+      <p class="lead">Wortfreund teaches everyday German vocabulary with a picture, the sound and the right article for every word. Short daily reviews bring each word back just before you'd forget it.</p>
+      <div class="cta">
+        <a class="btn play-link" href="#" aria-label="Get Wortfreund on Google Play">
+          <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M2 1.5 15 14 2 26.5c-.6-.3-1-1-1-1.8V3.3c0-.8.4-1.5 1-1.8Z" fill="currentColor" opacity=".9"/><path d="m19.5 9.6-4.5 4.4 4.5 4.4 4.3-2.4c1.4-.8 1.4-3.2 0-4Z" fill="currentColor" opacity=".7"/><path d="M2 1.5c.5-.2 1.1-.2 1.7.1l15.8 8L15 14Z" fill="currentColor"/><path d="M2 26.5 15 14l4.5 4.4-15.8 8c-.6.3-1.2.3-1.7.1Z" fill="currentColor" opacity=".8"/></svg>
+          <div><small>Get it on</small><span>Google Play</span></div>
+        </a>
+        <span class="note">Free for Android · works offline</span>
+      </div>
+    </div>
+    <div class="stack">
+      <div class="phone"><img src="shots/meet.webp" alt="Learning a new word: a photo of coffee, der Kaffee with its plural die Kaffees, and the English meaning coffee." width="600" height="1182"></div>
+    </div>
+  </header>
+
+  <section class="facts" aria-label="At a glance">
+    <div class="fact"><b>~5,700</b><span>everyday words in the offline dictionary, included</span></div>
+    <div class="fact"><b>~343,000</b><span>words in the full dictionary, a 15 MB download</span></div>
+    <div class="fact"><b>4 groups</b><span>to start with: A1 Basics, Food, Family and Travel</span></div>
+  </section>
+
+  <section class="feature" id="how">
+    <div class="text">
+      <p class="kicker">Your words</p>
+      <h2>Every article in its own color.</h2>
+      <p>Blue, red or green tells you der, die or das at a glance, so the article sticks without a grammar table. Every word has a photo, a clear voice and its plural.</p>
+      <div class="legend"><span class="chip der">der · masculine</span><span class="chip die">die · feminine</span><span class="chip das">das · neuter</span></div>
+      <p style="margin-top:22px">Start with ready-made A1 groups, or build your own for each textbook lesson. Want to test yourself? Hide the German and tap a word to peek.</p>
+    </div>
+    <div class="art"><div class="phone"><img src="shots/group.webp" alt="The A1 Food group in picture view: das Brot, die Butter, der Käse, die Milch." width="600" height="1182" loading="lazy"></div></div>
+  </section>
+
+  <section class="feature flip">
+    <div class="text">
+      <p class="kicker">Practice right away</p>
+      <h2>Three short steps until a word is yours.</h2>
+      <p>New words are practiced in turns, a few at a time. A word you miss shows up again a few questions later.</p>
+      <ol class="steps">
+        <li><b>1</b><span>Listen, then pick the meaning.</span></li>
+        <li><b>2</b><span>Pick the right sound out of four.</span></li>
+        <li><b>3</b><span>Say it yourself, then check.</span></li>
+      </ol>
+    </div>
+    <div class="art"><div class="phone"><img src="shots/sound.webp" alt="Step 2, Pick the right sound: which one means bread? Four sound buttons." width="600" height="1182" loading="lazy"></div></div>
+  </section>
+
+  <section class="feature">
+    <div class="text">
+      <p class="kicker">Daily reviews</p>
+      <h2>Words come back just before you'd forget them.</h2>
+      <p>Wortfreund schedules reviews with FSRS, a modern spaced-repetition method. Words you know come back less often, hard ones sooner. Most days take a few minutes.</p>
+      <p>Pick how you're asked: listen and guess, check the article, pick the German word, or say it from a picture.</p>
+    </div>
+    <div class="art"><div class="phone"><img src="shots/review.webp" alt="Review, Listen and guess: what does this word mean? Four photo answers: tea, butter, pepper, sugar." width="600" height="1182" loading="lazy"></div></div>
+  </section>
+
+  <section class="feature flip">
+    <div class="text">
+      <p class="kicker">Dictionary</p>
+      <h2>Search in English or German, even offline.</h2>
+      <p>Everyday words come first, with gender, plural and meaning. Add any result to a group in one tap. For whole phrases, the phone's translator or your own DeepL key fills in.</p>
+      <span class="example">teacher <span class="arrow" aria-hidden="true">→</span> <span><span class="der">der</span> Lehrer</span></span>
+    </div>
+    <div class="art"><div class="phone"><img src="shots/dictionary.webp" alt="Dictionary search for teacher: best match der Lehrer, also die Lehrerin." width="600" height="1182" loading="lazy"></div></div>
+  </section>
+
+  <section class="feature">
+    <div class="text">
+      <p class="kicker">A calm daily rhythm</p>
+      <h2>A clear finish line every day.</h2>
+      <p>Set how many new words a day suit you. When they're done, Wortfreund says so, and keeps your streak without nagging. Want more? Learn five extra any time.</p>
+      <p>Your progress can back up to your own Google Drive, so a new phone doesn't mean starting over.</p>
+    </div>
+    <div class="art pair">
+      <div class="phone"><img src="shots/done.webp" alt="Today after the daily goal: Fertig für heute, 15 new words, see you tomorrow, and an option to learn 5 more." width="600" height="1182" loading="lazy"></div>
+      <div class="phone"><img src="shots/streak.webp" alt="Streak window: 2 days in a row, with this week's days checked." width="600" height="1182" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="feature flip">
+    <div class="text">
+      <p class="kicker">Light and dark</p>
+      <h2>Easy on the eyes, morning or night.</h2>
+      <p>A quiet design in light and dark. Music and podcasts get quieter while a word is spoken, then come back.</p>
+    </div>
+    <div class="art pair">
+      <div class="phone"><img src="shots/today.webp" alt="Today screen in light mode." width="600" height="1182" loading="lazy"></div>
+      <div class="phone"><img src="shots/today-dark.webp" alt="Today screen in dark mode." width="600" height="1182" loading="lazy"></div>
+    </div>
+  </section>
+
+  <section class="closing">
+    <h2>Start with ten words today.</h2>
+    <p>Wortfreund is free, works offline and keeps your words on your phone, plus your own Google Drive if you want a backup.</p>
+    <div class="cta">
+      <a class="btn play-link" href="#" aria-label="Get Wortfreund on Google Play">
+        <svg width="26" height="28" viewBox="0 0 26 28" aria-hidden="true"><path d="M2 1.5 15 14 2 26.5c-.6-.3-1-1-1-1.8V3.3c0-.8.4-1.5 1-1.8Z" fill="currentColor" opacity=".9"/><path d="m19.5 9.6-4.5 4.4 4.5 4.4 4.3-2.4c1.4-.8 1.4-3.2 0-4Z" fill="currentColor" opacity=".7"/><path d="M2 1.5c.5-.2 1.1-.2 1.7.1l15.8 8L15 14Z" fill="currentColor"/><path d="M2 26.5 15 14l4.5 4.4-15.8 8c-.6.3-1.2.3-1.7.1Z" fill="currentColor" opacity=".8"/></svg>
+        <div><small>Get it on</small><span>Google Play</span></div>
+      </a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="f-links"><a href="privacy.html">Privacy policy</a><span>Contact: <span class="mail">labsbrewed@gmail.com</span></span></div>
+    <span>© 2026 BrewedLabs</span>
+  </footer>
 </div>
-<div class="card"><b>Get it on Google Play</b><br><span class="muted">Coming soon.</span></div>
-<footer class="muted"><a href="privacy.html">Privacy policy</a> · Contact: <a href="mailto:labsbrewed@gmail.com">labsbrewed@gmail.com</a> · © 2026 BrewedLabs</footer>
-</main></body></html>
+<script>
+/* Set the Play Store link here once the app is in production. */
+var PLAY_URL = "#";
+document.querySelectorAll(".play-link").forEach(function(a){ a.href = PLAY_URL; if (PLAY_URL !== "#") { a.target = "_blank"; a.rel = "noopener"; } });
+</script>
+
+</body>
+</html>
