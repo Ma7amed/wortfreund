@@ -1,46 +1,176 @@
-<!DOCTYPE html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Wortfreund – Privacy Policy</title><link rel="stylesheet" href="style.css"></head>
-<body><main>
-<p><a href="index.html">← Wortfreund</a></p>
-<h1>Privacy Policy</h1>
-<p class="muted">Wortfreund (com.brewedlabs.wortfreund) by BrewedLabs · Last updated: 4 November 2026</p>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Wortfreund Privacy Policy</title>
+<meta name="description" content="What Wortfreund keeps on your phone, what it sends to online services, and when.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+/* Layout: same header/footer as the landing page; one readable column; online services as label/value rows. */
+:root{
+  --bg:#F4F5FA; --surface:#FFFFFF; --ink:#14162B; --muted:#5D6178; --line:#E2E4EE;
+  --primary:#3346C8; --primary-tint:#E8EBFB;
+  --der:#2347C8; --die:#A3164F; --das:#1D6B30; --das-bg:#E2F1E5;
+  --font:"Plus Jakarta Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D; --das-bg:#18301F; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0F111B; --surface:#181B29; --ink:#ECEEF7; --muted:#A3A8BF; --line:#2A2E42;
+  --primary:#AAB5FF; --primary-tint:#232842;
+  --der:#93AAFF; --die:#FF91B9; --das:#83D69D; --das-bg:#18301F; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--font);font-size:16.5px;line-height:1.65;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+a{color:var(--primary)}
+a:focus-visible{outline:3px solid var(--primary);outline-offset:3px;border-radius:6px}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:22px}
+.mark{display:flex;align-items:center;gap:10px;font-weight:800;font-size:19px;color:var(--ink);text-decoration:none;letter-spacing:-.01em}
+.dots{display:flex;gap:4px}.dots i{width:9px;height:9px;border-radius:50%;display:block}
+.dots i:nth-child(1){background:var(--der)}.dots i:nth-child(2){background:var(--die)}.dots i:nth-child(3){background:var(--das)}
+nav a.back{color:var(--muted);text-decoration:none;font-weight:600;font-size:15px}
+nav a.back:hover{color:var(--ink)}
+article{max-width:720px;margin:0 auto;padding-block:24px 64px}
+h1{font-size:clamp(34px,5vw,48px);line-height:1.08;letter-spacing:-.025em;font-weight:800;margin:0 0 8px;text-wrap:balance}
+.date{color:var(--muted);font-size:15px;margin:0 0 28px}
+.summary{background:var(--das-bg);border-radius:18px;padding:20px 22px;margin:0 0 40px;font-weight:600}
+.summary p{margin:0}
+h2{font-size:22px;letter-spacing:-.01em;font-weight:800;margin:44px 0 10px;text-wrap:balance}
+p{margin:0 0 14px}
+ul{margin:0 0 14px;padding-left:20px}
+li{margin-bottom:6px}
+.muted{color:var(--muted)}
+.services{display:grid;gap:12px;margin:16px 0 8px}
+.svc{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px}
+.svc h3{margin:0 0 6px;font-size:16.5px;font-weight:800}
+.svc dl{display:grid;grid-template-columns:110px 1fr;gap:4px 14px;margin:0;font-size:15px}
+.svc dt{color:var(--muted);font-weight:600}
+.svc dd{margin:0;min-width:0}
+.off{display:inline-block;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--primary);background:var(--primary-tint);border-radius:999px;padding:2px 8px;margin-left:6px;vertical-align:2px}
+.mail{user-select:all;font-weight:600}
+footer{border-top:1px solid var(--line);padding-block:28px 40px;display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;color:var(--muted);font-size:14px}
+footer a{color:var(--muted)}
+@media (max-width:520px){.svc dl{grid-template-columns:1fr}.svc dt{margin-top:6px}}
+</style>
+<style>body{margin:0}img{max-width:100%}</style>
+</head>
+<body>
 
-<div class="card"><b>In short:</b> Wortfreund has no accounts and no servers of its own. Your words, pictures and progress stay on your phone. We do not collect, sell or share personal data, and the app contains no ads, analytics or tracking.</div>
+<div class="wrap">
+  <nav aria-label="Main">
+    <a class="mark" href="index.html"><span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>Wortfreund</a>
+    <a class="back" href="index.html">← Back to Wortfreund</a>
+  </nav>
 
-<h2>Data stored on your device</h2>
-<p>Your word groups, words, pictures you add, learning progress and settings are stored only in the app's private storage on your device. Uninstalling the app or clearing its data deletes them.</p>
+  <article>
+    <h1>Privacy policy</h1>
+    <p class="date">Last updated: November 21, 2026</p>
 
-<h2>Optional Google Drive backup</h2>
-<p>If you choose to connect Google Drive, the app saves a backup file to the hidden app folder of <b>your own</b> Google Drive account (the <code>drive.appdata</code> permission). The app can only see the files it created there, not your other Drive files. BrewedLabs never receives your backups or your Google account data. You can disconnect at any time in Settings, and delete the backup from Google Drive (Settings → Manage apps → Wortfreund → Delete hidden app data).</p>
+    <div class="summary"><p>Wortfreund has no accounts, no ads, no analytics and no tracking. Your words, pictures and progress stay on your phone. A few features use online services, and this page lists each one, what it receives and when.</p></div>
 
-<h2>Online services the app contacts</h2>
-<p>Some features send a short request to a third-party service. These requests contain only what is needed for the feature and no personal information:</p>
-<ul>
-<li><b>Dictionary lookups</b> (when a word is not in the offline dictionary and online lookup is on): the searched word is sent to kaikki.org (Wiktionary data).</li>
-<li><b>Picture search</b>: the search term (usually the English meaning of a word) is sent to Pixabay and Pexels; chosen pictures are downloaded and stored on your device.</li>
-<li><b>Word packs</b>: optional dictionary packs are downloaded from our public download page.</li>
-<li><b>DeepL</b> (only if you enter your own DeepL API key): the word to translate is sent to DeepL using your key.</li>
-</ul>
-<p>These services may log technical data such as your IP address, as any website does, under their own privacy policies.</p>
+    <h2>What stays on your phone</h2>
+    <p>Your word groups, words, pictures, learning progress, review history and settings are stored in the app's private storage. Uninstalling the app or clearing its data deletes them. Android's own cloud backup is turned off for this app, so nothing is copied anywhere without you choosing it.</p>
+    <p>If you add a DeepL key, it is stored encrypted on your phone and is never included in any backup.</p>
 
-<h2>On-device features</h2>
-<p>Pronunciation uses your phone's built-in text-to-speech, and machine translation (when used) runs on your device via Google ML Kit. Photos you take or pick from your gallery stay on your device.</p>
+    <h2>Google Drive backup (optional)</h2>
+    <p>If you connect Google Drive, Wortfreund saves backups to a hidden app folder in your own Google Drive. The app can only see the files it created there, nothing else in your Drive. BrewedLabs never receives your backups.</p>
+    <ul>
+      <li><b>What a backup contains:</b> your words, groups, pictures (including photos you added), learning progress and review history, and your app settings. It does not contain your DeepL key, your Google account email or any device ID.</li>
+      <li><b>When it runs:</b> when you tap "Back up now", automatically after you study while Drive is connected (this can use mobile data), and weekly if you turn that on (Wi-Fi only).</li>
+      <li><b>Your account email</b> is read only to show which account is connected. It stays on your phone.</li>
+      <li><b>To stop and delete:</b> disconnect Drive in Settings, then delete the app's data in Google Drive under Settings → Manage apps.</li>
+    </ul>
+    <p>You can also save a backup file yourself. It has the same content and goes only where you choose to save or share it.</p>
 
-<h2>Permissions</h2>
-<ul>
-<li><b>Internet</b>: for the online features above.</li>
-<li><b>Notifications</b>: for the optional daily reminder.</li>
-<li><b>Camera / photos</b>: only when you choose to add your own picture; uses the system picker.</li>
-</ul>
+    <h2>Online services</h2>
+    <p>These services receive only what is needed for the feature. Like any website, they can see your IP address and may keep technical logs under their own privacy policies.</p>
 
-<h2>Children</h2>
-<p>The app is not directed at children under 13 and does not knowingly collect any personal data from anyone.</p>
+    <div class="services">
+      <section class="svc">
+        <h3>Online dictionary · kaikki.org</h3>
+        <dl><dt>Receives</dt><dd>The word you search for, and sometimes its base form. Search starts while you type, so a partly typed word can be sent.</dd>
+        <dt>When</dt><dd>Only when the offline dictionary has no result and the online dictionary is on (Settings → Dictionary).</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Picture search · BrewedLabs relay → Pixabay, Pexels</h3>
+        <dl><dt>Receives</dt><dd>The search term, usually the word's English meaning, plus the picture type and safe search. The request goes through a small BrewedLabs relay on Cloudflare, so Pixabay and Pexels see Cloudflare's address, not yours. The relay stores no logs. It holds your IP address briefly in memory to limit abuse, and Cloudflare caches search results for up to 24 hours.</dd>
+        <dt>When</dt><dd>When you open the picture picker, and after you save a word without a picture if "Suggest a picture automatically" is on (Wi-Fi only).</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Picture search · Openverse <span class="off">off by default</span></h3>
+        <dl><dt>Receives</dt><dd>The search term, sent directly from your phone.</dd>
+        <dt>When</dt><dd>Only if you turn Openverse on as a picture source.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Picture downloads · image hosts</h3>
+        <dl><dt>Receives</dt><dd>A normal image download. Pixabay, Pexels or, for Openverse, the site hosting the picture can see your IP address.</dd>
+        <dt>When</dt><dd>Previews load in the picture picker. The picture you choose is downloaded once and then kept on your phone.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Dictionary packs · GitHub</h3>
+        <dl><dt>Receives</dt><dd>A normal file download, no personal data.</dd>
+        <dt>When</dt><dd>A weekly check for updated packs on Wi-Fi, and when you download the full dictionary.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>DeepL translation <span class="off">off by default</span></h3>
+        <dl><dt>Receives</dt><dd>The text to translate and your own API key.</dd>
+        <dt>When</dt><dd>Only if you turn DeepL on and add your key, and only when the dictionaries found nothing.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Voice · your phone's speech engine</h3>
+        <dl><dt>Receives</dt><dd>The German word or phrase being spoken. Wortfreund prefers natural online voices when you're online. With Google's speech engine, that means the text is sent to Google to be spoken. Offline voices run on the phone.</dd>
+        <dt>When</dt><dd>Whenever a word is spoken.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Phone translator · Google ML Kit</h3>
+        <dl><dt>Receives</dt><dd>A one-time download of the German–English language model. Translations then run on your phone. Google says ML Kit may send anonymous usage and diagnostic data.</dd>
+        <dt>When</dt><dd>After setup or from Settings, following your "Wi-Fi only" choice.</dd></dl>
+      </section>
+      <section class="svc">
+        <h3>Updates · Google Play</h3>
+        <dl><dt>Receives</dt><dd>Google Play's standard update check.</dd>
+        <dt>When</dt><dd>When you open the Today screen.</dd></dl>
+      </section>
+    </div>
 
-<h2>Changes</h2>
-<p>If this policy changes, the new version will be published on this page with a new date.</p>
+    <h2>Feedback</h2>
+    <p>"Send feedback" in Settings → About opens your own email app with our address filled in. Nothing is sent unless you send that email yourself, and the app adds no logs or device details.</p>
 
-<h2>Contact</h2>
-<p>Questions: <a href="mailto:labsbrewed@gmail.com">labsbrewed@gmail.com</a></p>
-<footer class="muted">© 2026 BrewedLabs</footer>
-</main></body></html>
+    <h2>What Wortfreund doesn't do</h2>
+    <ul>
+      <li>No ads, analytics or crash-reporting services.</li>
+      <li>No device IDs or advertising IDs.</li>
+      <li>No selling or sharing of your data.</li>
+    </ul>
+
+    <h2>Permissions</h2>
+    <ul>
+      <li><b>Internet and network state</b> for the online features above, and to wait for Wi-Fi when you ask for that.</li>
+      <li><b>Notifications</b> for the optional daily reminder.</li>
+      <li><b>Background work</b> (foreground service, wake lock, start at boot) so downloads, backups and your reminder can finish reliably.</li>
+    </ul>
+    <p>Wortfreund asks for no camera, storage, location or contacts permission. When you add your own picture, Android's photo picker or camera app hands over only the picture you choose.</p>
+
+    <h2>Children</h2>
+    <p>Wortfreund is not directed at children under 13 and does not knowingly collect personal data from anyone.</p>
+
+    <h2>Changes</h2>
+    <p>When this policy changes, the new version is posted on this page with a new date.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about privacy: <span class="mail">labsbrewed@gmail.com</span></p>
+  </article>
+
+  <footer>
+    <a href="index.html">Wortfreund</a>
+    <span>© 2026 BrewedLabs</span>
+  </footer>
+</div>
+
+</body>
+</html>
